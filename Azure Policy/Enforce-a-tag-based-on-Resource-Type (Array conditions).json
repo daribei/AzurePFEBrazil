@@ -1,0 +1,34 @@
+{
+    "mode": "Indexed",
+    "policyRule": {
+        "if": {
+            "allOf": [
+                {
+                    "field": "type",
+                    "in": "[parameters('tagResourceType')]"
+                },
+                {
+                    "field": "[concat('tags[', parameters('tagName'), ']')]",
+                    "exists": "false"
+                }
+            ]
+        },
+        "then": {
+            "effect": "deny"
+        }
+    },
+    "parameters": {
+        "tagName": {
+            "type": "String",
+            "metadata": {
+                "description": "Name of the tag, such as costCenter"
+            }
+        },
+        "tagResourceType": {
+            "type": "Array",
+            "metadata": {
+                "description": "Name of the Resource Types, such as: Microsoft.Storage/storageAccounts;Microsoft.Compute/disks"
+            }
+        }
+    }
+}

@@ -1,0 +1,66 @@
+{
+    "mode": "Indexed",
+    "policyRule": {
+        "if": {
+            "allOf": [
+                {
+                    "field": "type",
+                    "equals": "[parameters('tagResourceType')]"
+                },
+                {
+                    "not": {
+                        "field": "[concat('tags[', parameters('tagName'), ']')]",
+                        "equals": "[parameters('tagValue01')]"
+                    }
+                },
+                {
+                    "not": {
+                        "field": "[concat('tags[', parameters('tagName'), ']')]",
+                        "equals": "[parameters('tagValue02')]"
+                    }
+                },
+                {
+                    "not": {
+                        "field": "[concat('tags[', parameters('tagName'), ']')]",
+                        "equals": "[parameters('tagValue03')]"
+                    }
+                }
+            ]
+        },
+        "then": {
+            "effect": "deny"
+        }
+    },
+    "parameters": {
+        "tagName": {
+            "type": "String",
+            "metadata": {
+                "description": "Name of the tag, such as costCenter. Test for GIT"
+            }
+        },
+        "tagValue01": {
+            "type": "String",
+            "metadata": {
+                "description": "Value of the tag"
+            }
+        },
+        "tagValue02": {
+            "type": "String",
+            "metadata": {
+                "description": "Value of the tag"
+            }
+        },
+        "tagValue03": {
+            "type": "String",
+            "metadata": {
+                "description": "Value of the tag"
+            }
+        },
+        "tagResourceType": {
+            "type": "String",
+            "metadata": {
+                "description": "Name of the Resource Type, such as Microsoft.Storage/storageAccounts"
+            }
+        }
+    }
+}
