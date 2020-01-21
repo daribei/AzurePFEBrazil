@@ -302,7 +302,7 @@ foreach ($row in $input)
                         $blob = $filepath.Split('\')
                         $blob = $blob[$blob.Count-1]
                         Add-Content $AzureFiles $blob
-                        $logmessage = "Writing blob to file $AzureFiles"
+                        $logmessage = "Writing blob to file $AzureFiles."
                         LogEvent $logmessage 200
 
                     }
