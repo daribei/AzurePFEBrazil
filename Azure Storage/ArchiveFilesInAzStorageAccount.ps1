@@ -296,7 +296,7 @@ foreach ($row in $input)
                         $runningThreads.RemoveAt($t)
                         $currentNumberOfAzCopyThreads = $currentNumberOfAzCopyThreads - 1
 
-                        $logmessage = "Process $processid has finished, releasing $band Mbps bandwidth"
+                        $logmessage = "Process $processid has finished, releasing $band Mbps bandwidth."
                         LogEvent $logmessage 200
 
                         $blob = $filepath.Split('\')
