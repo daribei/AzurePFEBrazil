@@ -16,7 +16,7 @@ $AzureFiles = "$azcopyPath\AzureBlobs.txt"
 # Set Storage Account information
 $storageAccountName = "sajbackupprodsa"
 $storageAccountContainer = "sajbackup-prod-cont"
-$storageAccountSAS = "?sv=2019-02-02&ss=bfqt&srt=sco&sp=rwdlacup&se=2020-03-02T14:00:00Z&st=2020-01-20T14:10:40Z&spr=https&sig=KGXipLLOlysda4vBURM39RT77ToeHs7kIunj7WmdUQI%3D"
+$storageAccountSAS = "<SASKey>"
 #endregion GlobalVariables
 
 #region Functions
