@@ -23,7 +23,7 @@ if ($stgAvailability.Reason -eq "AlreadyExists") {
 
 else {
     $storageAccount = New-AzStorageAccount -Name $storageAccountName -Location $location -ResourceGroupName $rgName -SkuName Standard_LRS -Kind StorageV2 `
-    -EnableHttpsTrafficOnly:$true -Tag @{CentroDeCusto="$nomeDoCentroDeCusto"}
+    -EnableHttpsTrafficOnly:$true -EnableLargeFileShare -Tag @{CentroDeCusto="$nomeDoCentroDeCusto"}
     
     Write-Host "Conta de armazenamento $storageAccountName criada com sucesso."
     Write-Host "Compartilhamento $fileShareName criado com sucesso." 
