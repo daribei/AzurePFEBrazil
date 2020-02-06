@@ -8,7 +8,9 @@ Select-AzSubscription -SubscriptionId ($SubscriptionId).Id
 # Azure Resources Variables
 $storageAccountName = "Nome da Conta de Armazenamento"
 $fileShareName = "Nome do File Share"
+$nomeDoCentroDeCusto = "Centro de Custo"
 
+# Default Variables
 $location = "brazilsouth"
 $rgName = "PDBL-AFS-PRD-BR-RG"
 
@@ -21,7 +23,7 @@ if ($stgAvailability.Reason -eq "AlreadyExists") {
 
 else {
     $storageAccount = New-AzStorageAccount -Name $storageAccountName -Location $location -ResourceGroupName $rgName -SkuName Standard_LRS -Kind StorageV2 `
-    -EnableHttpsTrafficOnly:$true
+    -EnableHttpsTrafficOnly:$true -Tag @{CentroDeCusto="$nomeDoCentroDeCusto"}
     
     Write-Host "Conta de armazenamento $storageAccountName criada com sucesso."
     Write-Host "Compartilhamento $fileShareName criado com sucesso." 
