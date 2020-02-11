@@ -1,5 +1,6 @@
-$SubscriptionId = Get-AzSubscription | Out-GridView -PassThru
+Login-AzAccount
 
+$SubscriptionId = Get-AzSubscription | Out-GridView -PassThru
 Select-AzSubscription -SubscriptionId ($SubscriptionId).Id
 
 foreach ($group in Get-AzResourceGroup) {
