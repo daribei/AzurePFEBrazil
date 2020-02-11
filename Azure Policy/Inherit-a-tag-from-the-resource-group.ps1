@@ -13,10 +13,11 @@ foreach ($group in Get-AzResourceGroup) {
                     if (-not($resourcetags.ContainsKey($key))) {
                         $resourcetags.Add($key, $group.Tags[$key])
                     }
-                    else {
-                        $resourcetags.Remove($key)
-                        $resourcetags.Add($key, $group.Tags[$key])
-                    }
+# Remove os comentario abaixo se voce deseja atualizar os recursos que ja possuem as tags
+#                    else {
+#                        $resourcetags.Remove($key)
+#                        $resourcetags.Add($key, $group.Tags[$key])
+#                    }
                 }
                 Set-AzResource -Tag $resourcetags -ResourceId $r.ResourceId -Force
             }
