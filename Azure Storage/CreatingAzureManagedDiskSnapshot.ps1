@@ -18,6 +18,13 @@ while (!($connectionResult) -And ($logonAttempt -le 10)) {
     Start-Sleep -Seconds 30
 }
 
+# Remove old snapshots
+$snapshotnames = (Get-AzSnapshot -ResourceGroupName $resourceGroupName).name
+foreach($snapname in $snapshotnames)
+{
+    Get-AzSnapshot -ResourceGroupName $resourceGroupName -SnapshotName $snapname | ?{($_.TimeCreated) -lt ([datetime]::UtcNow.AddMinutes(-10080))} | Remove-AzSnapshot -Force
+} 
+
 foreach ($VMs in Get-AzVM -ResourceGroupName $resourceGroupName) {  
     #Set local variables 
     $location = $VMs.Location 
@@ -25,7 +32,7 @@ foreach ($VMs in Get-AzVM -ResourceGroupName $resourceGroupName) {
     $timestamp = Get-Date -f MM-dd-yyyy_HH_mm_ss 
  
     #Snapshot name of OS data disk 
-    $snapshotName = $VMs.Name + $timestamp  
+    $snapshotName = "bkp-" + $VMs.Name + "-" + $timestamp 
  
     #Create snapshot configuration 
     $snapshot = New-AzSnapshotConfig -SourceUri $VMs.StorageProfile.OsDisk.ManagedDisk.Id -Location $location  -CreateOption copy 
