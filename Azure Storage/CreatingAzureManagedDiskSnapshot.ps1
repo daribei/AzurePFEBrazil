@@ -47,7 +47,7 @@ foreach ($VMs in Get-AzVM -ResourceGroupName $resourceGroupName) {
         for ($i = 0; $i -le $VMs.StorageProfile.DataDisks.Count - 1; $i++) { 
                                  
             #Snapshot name of OS data disk 
-            $snapshotName = $VMs.StorageProfile.DataDisks[$i].Name + $timestamp  
+            $snapshotName = "bkp-" + $VMs.StorageProfile.DataDisks[$i].Name + "-" + $timestamp
                              
             #Create snapshot configuration 
             $snapshot = New-AzSnapshotConfig -SourceUri $VMs.StorageProfile.DataDisks[$i].ManagedDisk.Id -Location $location  -CreateOption copy 
