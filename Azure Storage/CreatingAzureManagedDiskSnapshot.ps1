@@ -22,7 +22,7 @@ while (!($connectionResult) -And ($logonAttempt -le 10)) {
 $snapshotnames = (Get-AzSnapshot -ResourceGroupName $resourceGroupName).name
 foreach($snapname in $snapshotnames)
 {
-    Get-AzSnapshot -ResourceGroupName $resourceGroupName -SnapshotName $snapname | ?{($_.TimeCreated) -lt ([datetime]::UtcNow.AddMinutes(-10080))} | Remove-AzSnapshot -Force
+    Get-AzSnapshot -ResourceGroupName $resourceGroupName -SnapshotName $snapname | Where-Object{($_.TimeCreated) -lt ([datetime]::UtcNow.AddMinutes(-10080))} | Remove-AzSnapshot -Force
 } 
 
 foreach ($VMs in Get-AzVM -ResourceGroupName $resourceGroupName) {  
