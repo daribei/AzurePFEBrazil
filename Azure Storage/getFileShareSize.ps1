@@ -1,4 +1,11 @@
-﻿#region script global variables
+﻿<#
+    .DESCRIPTION
+        This script is just an example of how to get the total file share size and send this information to Log Analytics.
+    .NOTES
+   
+#>
+
+#region script global variables
 $global:totalLenght=0
 #endregion
 
