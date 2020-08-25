@@ -1,22 +1,16 @@
-﻿$Linux = 0
-$Windows = 0
+﻿$getSoType = @()
 
 foreach ($Subscription in (Get-AzSubscription))
 {
     Select-AzSubscription -SubscriptionId ($Subscription).Id
 
         foreach ($vms in (Get-AzVM))
-        {      
-            if ($vm.StorageProfile.OsDisk.OsType -eq "Linux" )
-                {
-                    $Linux++
-                }
-            else
-                {
-                    $Windows++   
-                }
+        {   
+            $getSoType += [pscustomobject]@{
+            Name = $VMs.Name  
+            SO_Type = $vms.StorageProfile.OsDisk.OsType
+            }
         }
 }
-
-Write-Host "VMs Linux: " $Linux
-Write-Host "VMs Windows: " $Windows
+$getSoType
+$getSoType | Export-Csv ".\SO_Type.csv" -NoTypeInformation -Encoding UTF8
